@@ -1,0 +1,21 @@
+# Секреты
+.env
+.env.*
+*.key
+secrets.json
+
+# Зависимости
+node_modules/
+venv/
+__pycache__/
+
+# Базы и личные данные
+*.sqlite
+*.sqlite3
+backups/
+nexus-backup-*.json
+
+# Система
+.DS_Store
+Thumbs.db
+*.log
