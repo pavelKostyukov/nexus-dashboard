@@ -29,7 +29,7 @@ body::before{content:'';position:absolute;inset:0;background:
 ::-webkit-scrollbar-thumb:hover{background:var(--blue)}
 
 .app{display:flex;min-height:100vh;position:relative}
-.sidebar{width:250px;background:var(--surface);border-right:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:50;transition:transform .3s;overflow-y:auto}
+.sidebar{width:250px;background:var(--surface);border-right:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:50;transition:transform .3s;overflow-y:auto;transform:translateX(-100%)}
 .logo{display:flex;align-items:center;gap:12px;padding:0 20px 24px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .logo-icon{width:42px;height:42px;background:var(--grad1);border-radius:12px;display:grid;place-items:center;font-size:20px;box-shadow:0 4px 20px rgba(79,140,255,.4)}
 .logo-text h1{font-size:18px;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
@@ -51,9 +51,9 @@ body::before{content:'';position:absolute;inset:0;background:
 .pulse{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(52,211,153,0)}}
 
-.main{flex:1;margin-left:250px;display:flex;flex-direction:column;min-height:100vh}
-.topbar{height:52px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 16px;gap:12px;position:relative;z-index:40}
-.menu-btn{display:none;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer}
+.main{flex:1;margin-left:0;display:flex;flex-direction:column;min-height:100vh}
+.topbar{height:44px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 10px;gap:10px;position:relative;z-index:40}
+.menu-btn{display:block;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:4px 8px}
 .page-title{font-size:18px;font-weight:700;flex:1}
 .search{position:relative;width:280px}
 .search input{width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:9px 14px 9px 38px;color:var(--text);font-size:13px;outline:none;transition:all .2s}
@@ -72,12 +72,12 @@ body::before{content:'';position:absolute;inset:0;background:
 .btn-danger:hover{background:rgba(248,113,113,.25)}
 .btn-sm{padding:6px 12px;font-size:12px}
 
-.content{flex:1;padding:12px}
+.content{flex:1;padding:8px}
 .view{display:none;animation:fadeIn .4s ease}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-.hero{background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(168,85,247,.08));border:1px solid rgba(79,140,255,.2);border-radius:14px;padding:16px;margin-bottom:12px;position:relative;overflow:clip}
+.hero{background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(168,85,247,.08));border:1px solid rgba(79,140,255,.2);border-radius:12px;padding:10px;margin-bottom:8px;position:relative;overflow:clip}
 .hero::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(168,85,247,.15),transparent 70%);animation:float 8s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,20px)}}
 .hero-content{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
@@ -352,25 +352,16 @@ body::before{content:'';position:absolute;inset:0;background:
 .empty-state p{font-size:14px}
 
 @media(max-width:900px){
-  .sidebar{transform:translateX(-100%)}
-  .sidebar.open{transform:none}
-  .main{margin-left:0}
-  .menu-btn{display:block}
-  .search{width:180px}
-  .content{padding:8px}
-  .hero h2{font-size:18px}
-  .grid-2,.grid-3{grid-template-columns:1fr}
-  .metrics-row{grid-template-columns:repeat(2,1fr)}
-  .family-grid,.settings-grid{grid-template-columns:1fr}
-  .hero{padding:12px}
-  .topbar{padding:0 10px;height:48px}
-}
-@media(max-width:600px){
   .search{display:none}
-  .topbar{padding:0 14px}
   .kpi-grid{grid-template-columns:1fr 1fr}
   .donut-wrap{flex-direction:column}
   .episode-card{flex-direction:column;align-items:flex-start}
+}
+@media(min-width:1200px){
+  .sidebar{transform:none}
+  .sidebar.open{transform:none}
+  .main{margin-left:250px}
+  .menu-btn{display:none}
 }
 </style>
 </head>
@@ -453,7 +444,7 @@ body::before{content:'';position:absolute;inset:0;background:
         <div class="grid-2">
           <div class="card">
             <div class="card-head"><div class="card-title"><span class="emoji">📈</span>Динамика капитала</div><span class="card-action" data-goto="finance">Подробнее →</span></div>
-            <div class="chart-container"><canvas id="capitalChart" width="325" height="455" style="width: 185.786px; height: 260px;"></canvas></div>
+            <div class="chart-container"><canvas id="capitalChart" width="573" height="455" style="width: 327.429px; height: 260px;"></canvas></div>
           </div>
           <div class="card">
             <div class="card-head"><div class="card-title"><span class="emoji">🎯</span>Распределение задач</div><span class="card-action" data-goto="projects">Все задачи →</span></div>
