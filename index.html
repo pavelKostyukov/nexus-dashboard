@@ -29,7 +29,8 @@ body::before{content:'';position:absolute;inset:0;background:
 ::-webkit-scrollbar-thumb:hover{background:var(--blue)}
 
 .app{display:flex;min-height:100vh;position:relative}
-.sidebar{width:250px;background:var(--surface);border-right:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:50;transition:transform .3s;overflow-y:auto;transform:translateX(-100%)}
+.sidebar{width:250px;background:var(--surface);border-right:1px solid var(--line);padding:20px 0;display:flex;flex-direction:column;position:fixed;top:0;bottom:0;left:0;z-index:100;transition:transform .25s ease;overflow-y:auto;transform:translateX(-100%)!important}
+.sidebar.open{transform:translateX(0)!important}
 .logo{display:flex;align-items:center;gap:12px;padding:0 20px 24px;border-bottom:1px solid var(--line);margin-bottom:16px}
 .logo-icon{width:42px;height:42px;background:var(--grad1);border-radius:12px;display:grid;place-items:center;font-size:20px;box-shadow:0 4px 20px rgba(79,140,255,.4)}
 .logo-text h1{font-size:18px;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:1px}
@@ -51,8 +52,7 @@ body::before{content:'';position:absolute;inset:0;background:
 .pulse{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(52,211,153,0)}}
 
-.main{flex:1;margin-left:0;display:flex;flex-direction:column;min-height:100vh}
-.topbar{height:44px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 10px;gap:10px;position:relative;z-index:40}
+.main{flex:1;margin-left:0;display:flex;flex-direction:column;min-height:100vh}.topbar{height:44px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 10px;gap:10px;position:relative;z-index:40}
 .menu-btn{display:block;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:4px 8px}
 .page-title{font-size:18px;font-weight:700;flex:1}
 .search{position:relative;width:280px}
@@ -357,20 +357,17 @@ body::before{content:'';position:absolute;inset:0;background:
   .donut-wrap{flex-direction:column}
   .episode-card{flex-direction:column;align-items:flex-start}
 }
-@media(min-width:1200px){
-  .sidebar{transform:none}
-  .sidebar.open{transform:none}
-  .main{margin-left:250px}
-  .menu-btn{display:none}
-}
 </style>
 </head>
 <body>
 <div class="app">
   <aside class="sidebar" id="sidebar">
-    <div class="logo">
-      <div class="logo-icon">⚡</div>
-      <div class="logo-text"><h1>NEXUS</h1><span>Operations Hub</span></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div class="logo" style="border:none;margin-bottom:0;padding:0">
+        <div class="logo-icon">⚡</div>
+        <div class="logo-text"><h1>NEXUS</h1><span>Operations Hub</span></div>
+      </div>
+      <button id="closeSidebarBtn" style="background:none;border:1px solid var(--line);color:var(--muted);font-size:20px;cursor:pointer;width:36px;height:36px;border-radius:10px;display:grid;place-items:center">✕</button>
     </div>
     <nav class="nav" id="nav">
       <div class="nav-section">Основное</div>
@@ -1704,8 +1701,19 @@ function init(){
   $('#todayMonth').textContent = now.toLocaleDateString('ru-RU',{month:'long',year:'numeric'});
 
   // Nav
-  $$('.nav-item').forEach(n=>n.addEventListener('click',()=>switchView(n.dataset.view)));
-  $('#menuBtn').addEventListener('click',()=>$('#sidebar').classList.toggle('open'));
+  $$('.nav-item').forEach(n=>n.addEventListener('click',()=>{
+    switchView(n.dataset.view);
+    $('#sidebar').classList.remove('open');
+    document.body.style.overflow='';
+  }));
+  $('#menuBtn').addEventListener('click',()=>{
+    $('#sidebar').classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+  $('#closeSidebarBtn').addEventListener('click',()=>{
+    $('#sidebar').classList.remove('open');
+    document.body.style.overflow='';
+  });
   $$('[data-goto]').forEach(el=>el.addEventListener('click',()=>switchView(el.dataset.goto)));
 
   // Overview project cards
