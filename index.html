@@ -52,7 +52,7 @@ body::before{content:'';position:absolute;inset:0;background:
 .pulse{width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(52,211,153,.5)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(52,211,153,0)}}
 
-.main{flex:1;margin-left:0;display:flex;flex-direction:column;min-height:100vh}.topbar{height:44px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 10px;gap:10px;position:relative;z-index:40}
+.main{flex:1;margin-left:0;display:flex;flex-direction:column;min-height:100vh}.topbar{height:36px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 6px;gap:8px;position:fixed;top:0;left:0;right:0;z-index:90}
 .menu-btn{display:block;background:none;border:none;color:var(--text);font-size:22px;cursor:pointer;padding:4px 8px}
 .page-title{font-size:18px;font-weight:700;flex:1}
 .search{position:relative;width:280px}
@@ -72,12 +72,12 @@ body::before{content:'';position:absolute;inset:0;background:
 .btn-danger:hover{background:rgba(248,113,113,.25)}
 .btn-sm{padding:6px 12px;font-size:12px}
 
-.content{flex:1;padding:8px}
+.content{flex:1;padding:2px;padding-top:38px}
 .view{display:none;animation:fadeIn .4s ease}
 .view.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-.hero{background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(168,85,247,.08));border:1px solid rgba(79,140,255,.2);border-radius:12px;padding:10px;margin-bottom:8px;position:relative;overflow:clip}
+.hero{background:linear-gradient(135deg,rgba(79,140,255,.12),rgba(168,85,247,.08));border:1px solid rgba(79,140,255,.2);border-radius:8px;padding:6px;margin-bottom:4px;position:relative;overflow:clip}
 .hero::before{content:'';position:absolute;top:-50%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(168,85,247,.15),transparent 70%);animation:float 8s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,20px)}}
 .hero-content{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
@@ -88,7 +88,7 @@ body::before{content:'';position:absolute;inset:0;background:
 .hero-date b{font-size:22px;display:block;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero-date span{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px;margin-bottom:6px}
 .kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;position:relative;overflow:hidden;transition:all .3s}
 .kpi:hover{transform:translateY(-3px);border-color:var(--line2);box-shadow:var(--shadow)}
 .kpi::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--kpi-color,var(--blue))}
@@ -441,7 +441,7 @@ body::before{content:'';position:absolute;inset:0;background:
         <div class="grid-2">
           <div class="card">
             <div class="card-head"><div class="card-title"><span class="emoji">📈</span>Динамика капитала</div><span class="card-action" data-goto="finance">Подробнее →</span></div>
-            <div class="chart-container"><canvas id="capitalChart" width="573" height="455" style="width: 327.429px; height: 260px;"></canvas></div>
+            <div class="chart-container"><canvas id="capitalChart" width="594" height="455" style="width: 339.429px; height: 260px;"></canvas></div>
           </div>
           <div class="card">
             <div class="card-head"><div class="card-title"><span class="emoji">🎯</span>Распределение задач</div><span class="card-action" data-goto="projects">Все задачи →</span></div>
